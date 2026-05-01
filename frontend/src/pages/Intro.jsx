@@ -23,7 +23,6 @@ const Intro = () => {
         className="bg-vintage border border-ink p-12 max-w-2xl w-full shadow-2xl flex flex-col items-center text-center relative"
       >
         <div className="absolute top-0 left-0 w-full h-1 border-t border-b border-ink mt-1" />
-        <div className="text-xs tracking-widest uppercase mb-6 font-sans border-b border-ink pb-2 text-ink">Est. 2026 • The Global Archive</div>
         <h1 className="text-6xl md:text-8xl font-serif font-black text-ink mb-6 uppercase tracking-tighter">DIARY<br/>ME</h1>
         <p className="font-serif text-lg md:text-xl italic text-gray-700 max-w-md border-t border-b border-docborder py-4 mb-8">
           A place for your thoughts, constructed with the discipline of a vintage press and the utility of the ultimate document editor.

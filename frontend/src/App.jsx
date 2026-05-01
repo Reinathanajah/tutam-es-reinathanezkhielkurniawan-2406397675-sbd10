@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Intro from './pages/Intro';
 import Auth from './pages/Auth';
@@ -7,6 +7,12 @@ import AddNew from './pages/AddNew';
 import SeeOthers from './pages/SeeOthers';
 
 function App() {
+  useEffect(() => {
+    if (window.location.pathname !== '/') {
+      window.location.href = '/';
+    }
+  }, []);
+
   return (
     <Router>
       <Routes>
