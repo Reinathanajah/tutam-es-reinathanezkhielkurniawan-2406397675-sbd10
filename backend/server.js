@@ -14,13 +14,22 @@ app.use(cors());
 app.use(express.json());
 
 const MONGO_URI = process.env.MONGO_URI;
-
-mongoose.connect(MONGO_URI, {
-  serverSelectionTimeoutMS: 10000,
-  family: 4 // Fix DNS resolution issues di Node 18+ (Vercel)
-})
-  .then(() => console.log('MongoDB Connected'))
-  .catch((err) => console.error('MongoDB Error:', err));
+let isConnected = false;
+const connectDB = async (req, res, next) => {
+  if (isConnected) return next();
+  try {
+    const db = await mongoose.connect(MONGO_URI, {
+      serverSelectionTimeoutMS: 10000,
+      family: 4
+    });
+    isConnected = db.connections[0].readyState === 1;
+    next();
+  } catch (err) {
+    console.error('MongoDB Error:', err);
+    res.status(500).json({ error: 'Database connection failed' });
+  }
+};
+app.use(connectDB);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/entries', entryRoutes);
