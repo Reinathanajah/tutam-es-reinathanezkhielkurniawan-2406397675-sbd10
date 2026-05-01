@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@layer utilities {
+  .newspaper-col {
+    column-count: 2;
+    column-gap: 2rem;
+    column-rule: 1px solid #E3E3E3;
+  }
+  .bg-floating-gradient {
+    background: linear-gradient(-45deg, rgba(212, 185, 150, 0.1), rgba(255, 255, 255, 1), rgba(212, 185, 150, 0.2), rgba(255, 255, 255, 1));
+    background-size: 400% 400%;
+    animation: floating 15s ease infinite;
+  }
+  .animate-floating-box {
+    animation: floatBox 6s ease-in-out infinite;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #F8F9FA;
+  color: #111111;
+}
+
+.gemini-gradient-text {
+  background: linear-gradient(90deg, #4285f4, #9b72cb, #d96570, #4285f4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 300% 100%;
+  animation: gradientText 4s linear infinite;
+}
+
+@keyframes floatBox {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes gradientText {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
