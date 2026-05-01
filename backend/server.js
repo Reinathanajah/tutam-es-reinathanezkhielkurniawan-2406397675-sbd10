@@ -15,14 +15,19 @@ app.use(express.json());
 
 const MONGO_URI = process.env.MONGO_URI;
 
-mongoose.connect(MONGO_URI)
+mongoose.connect(MONGO_URI, {
+  serverSelectionTimeoutMS: 10000,
+  family: 4 // Fix DNS resolution issues di Node 18+ (Vercel)
+})
   .then(() => console.log('MongoDB Connected'))
   .catch((err) => console.error('MongoDB Error:', err));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/entries', entryRoutes);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
 
 export default app;
